@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'submitRequest.dart';
 
 class Dashboard extends StatelessWidget {
   @override
@@ -30,8 +31,12 @@ class Dashboard extends StatelessWidget {
   }
 
   Widget _gridItem(BuildContext context, String title, String route) {
-    return GestureDetector(
-      onTap: () {},
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(
+            context,
+            route);
+      },
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -61,7 +66,7 @@ class Dashboard extends StatelessWidget {
 }
 
 final List<Map<String, String>> menuItems = [
-  {'title': 'Submit Request', 'route': '/submit-request'},
+  {'title': 'Submit Request', 'route': '/submitRequest'},
   {'title': 'Submit First Appeal', 'route': '/first-appeal'},
   {'title': 'View Status', 'route': '/view-status'},
   {'title': 'View History', 'route': '/view-history'},

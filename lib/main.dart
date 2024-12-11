@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'SecondPage.dart';
+import 'submitRequest.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,8 +11,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: HomePage(),
+      routes: {
+        '/submitRequest' : (content) => const submitRequest(),
+      },
     );
   }
 }
