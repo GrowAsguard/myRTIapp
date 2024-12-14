@@ -47,6 +47,11 @@ class _ThirdPageState extends State<ThirdPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 20),
+                height: 100,
+                child: Image.asset('img/logo2.png'),
+              ),
               Text(
                 "Create a New Account",
                 style: TextStyle(
@@ -56,6 +61,15 @@ class _ThirdPageState extends State<ThirdPage> {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 20),
+
+              Text(
+                "Register with your full name, email and password to proceed",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                ),
+              ),
+              SizedBox(height: 16),
 
               // Name Input
               TextFormField(

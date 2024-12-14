@@ -73,45 +73,91 @@ class HomePage extends StatelessWidget {
           ),
 
 
+          // Align(
+          //   alignment: Alignment.bottomCenter,
+          //   child: Padding(
+          //     padding: const EdgeInsets.only(bottom: 160),
+          //     child: Stack(
+          //       alignment: Alignment.center,
+          //       children: [
+          //
+          //         Container(
+          //           width: 100,
+          //           height: 100,
+          //           decoration: const BoxDecoration(
+          //             color: Colors.white,
+          //             shape: BoxShape.circle,
+          //             boxShadow: [
+          //               BoxShadow(
+          //                 color: Colors.black26,
+          //                 blurRadius: 8,
+          //                 offset: Offset(2, 2),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+          //
+          //
+          //         IconButton(
+          //           icon: const Icon(
+          //             Icons.play_arrow,
+          //             size: 70,
+          //             color: Colors.black54,
+          //           ),
+          //           onPressed: () {
+          //             Navigator.push(
+          //               context,
+          //               MaterialPageRoute(builder: (context) => SecondPage()),
+          //             );
+          //           },
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 160),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          blurRadius: 8,
-                          offset: Offset(2, 2),
+              child: Material(
+                color: Colors.transparent, // Transparent material for ripple effect
+                shape: const CircleBorder(),
+                child: InkResponse(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SecondPage()),
+                    );
+                  },
+                  radius: 50, // Adjust this to control ripple size
+                  splashColor: Colors.grey.withOpacity(0.3), // Ripple effect color
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                        width: 100,
+                        height: 100,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 8,
+                              offset: Offset(2, 2),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                      const Icon(
+                        Icons.play_arrow,
+                        size: 70,
+                        color: Colors.black54,
+                      ),
+                    ],
                   ),
-
-
-                  IconButton(
-                    icon: const Icon(
-                      Icons.play_arrow,
-                      size: 70,
-                      color: Colors.black54,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SecondPage()),
-                      );
-                    },
-                  ),
-                ],
+                ),
               ),
             ),
           ),
