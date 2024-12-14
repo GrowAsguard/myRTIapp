@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:my_rti/contactUs.dart';
+
+//importing routes i.e. pages from dashboard navigation
 import 'SecondPage.dart';
 import 'submitRequest.dart';
+import 'faq.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,6 +19,8 @@ class MyApp extends StatelessWidget {
       home: HomePage(),
       routes: {
         '/submitRequest' : (content) => const submitRequest(),
+        '/contactUs' : (context) => const contactUs(),
+        '/faq' : (context) => const faq(),
       },
     );
   }

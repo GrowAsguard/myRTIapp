@@ -67,9 +67,9 @@ class Dashboard extends StatelessWidget {
 
 final List<Map<String, String>> menuItems = [
   {'title': 'Submit Request', 'route': '/submitRequest'},
-  {'title': 'Submit First Appeal', 'route': '/first-appeal'},
-  {'title': 'View Status', 'route': '/view-status'},
-  {'title': 'View History', 'route': '/view-history'},
-  {'title': 'Contact Us', 'route': '/contact-us'},
+  {'title': 'Submit First Appeal', 'route': '/submitFirstAppeal'},
+  {'title': 'View Status', 'route': '/viewStatus'},
+  {'title': 'View History', 'route': '/viewHistory'},
+  {'title': 'Contact Us', 'route': '/contactUs'},
   {'title': 'FAQ', 'route': '/faq'},
 ];

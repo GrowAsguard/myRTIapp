@@ -12,7 +12,7 @@ class _SecondPageState extends State<SecondPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   void _login() {
-    const String validUsername = "Admin123";
+    const String validUsername = "123";
     const String validPassword = "123";
 
     String username = _usernameController.text;
