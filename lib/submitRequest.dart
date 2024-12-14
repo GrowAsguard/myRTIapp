@@ -25,6 +25,27 @@ class _submitRequestState extends State<submitRequest> {
   String _citizenship = 'Indian';
   String? _ministry;
   String? _publicAuthority;
+  String? _state;
+  String? _status;
+  String? _eStatus;
+
+  final List<String> governmentDepartments = [
+    "Cabinet Secretariat",
+    "Comptroller and Auditor General of India",
+    "Department of Administrative Reforms & PG",
+    "Department of Agricultural Research & Education",
+  ];
+
+  final List<String> publicAuthorities = [
+    "Cabinet Secretariat",
+    "Department of Agricultural Research & Education",
+  ];
+
+  final List<String> stateList = [
+    "Karnataka",
+    "Kerala",
+  ];
+
 
   @override
   void dispose() {
@@ -41,7 +62,11 @@ class _submitRequestState extends State<submitRequest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('RTI Request Form')),
+      appBar: AppBar(
+        title: Text('RTI Request Form'),
+        backgroundColor: Colors.cyan,
+      ),
+
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -57,37 +82,56 @@ class _submitRequestState extends State<submitRequest> {
                   'Online RTI Request Form',
                   style: TextStyle(
                     color: Colors.blue,
-                    fontSize: 30,
+                    fontSize: 36,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                
+
                 // Text - fields marked with * etc
                 const Text(
                   'Note: Fields marked with * are Mandatory.',
                   style: TextStyle(color: Colors.red)),
 
+                // Text - Public Authority Details:-
+                const Text(
+                  "\n\nPublic Authority Details:- ",
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
 
                 // Ministry Dropdown
                 DropdownButtonFormField<String>(
                   value: _ministry,
                   decoration: InputDecoration(labelText: 'Select Ministry/Department/Apex Body'),
-                  items: ['Ministry A', 'Ministry B', 'Ministry C']
+                  items: governmentDepartments
                       .map((ministry) => DropdownMenuItem(value: ministry, child: Text(ministry)))
                       .toList(),
                   onChanged: (value) => setState(() => _ministry = value),
                   validator: (value) => value == null ? 'Please select a ministry' : null,
                 ),
 
-                // Public Authority Dropdown
+                // Public Authority DropDown
                 DropdownButtonFormField<String>(
                   value: _publicAuthority,
                   decoration: InputDecoration(labelText: 'Select Public Authority'),
-                  items: ['Authority X', 'Authority Y', 'Authority Z']
-                      .map((authority) => DropdownMenuItem(value: authority, child: Text(authority)))
+                  items: publicAuthorities
+                      .map((publicAuthority) => DropdownMenuItem(value: publicAuthority, child: Text(publicAuthority)))
                       .toList(),
                   onChanged: (value) => setState(() => _publicAuthority = value),
-                  validator: (value) => value == null ? 'Please select a public authority' : null,
+                  validator: (value) => value == null ? 'Please select a Public Authority' : null,
+                ),
+
+                // Text - Personal Details of RTI Applicant:-
+                const Text(
+                  "\n\nPersonal Details of RTI Applicant:- ",
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
 
                 // Email Field
@@ -122,7 +166,7 @@ class _submitRequestState extends State<submitRequest> {
                 // Phone Number Field
                 TextFormField(
                   controller: _phoneController,
-                  decoration: InputDecoration(labelText: 'Mobile Number'),
+                  decoration: InputDecoration(labelText: 'Mobile Number (For receiving SMS alerts)'),
                   keyboardType: TextInputType.phone,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -201,6 +245,91 @@ class _submitRequestState extends State<submitRequest> {
                   },
                 ),
 
+                // Country Radio Buttons
+                Row(
+                  children: [
+                    const Text('Country:'),
+
+                    Radio(
+                        value: "India",
+                        groupValue: _country,
+                        onChanged: (value) => setState(() => _country = value.toString())
+                    ),
+                    const Text("India"),
+
+                    Radio(
+                        value: "Other",
+                        groupValue: _country,
+                        onChanged: (value) => setState(() => _country = value.toString())
+                    ),
+                    const Text("Other"),
+                  ],
+                ),
+
+                // State Dropdown
+                DropdownButtonFormField<String>(
+                  value: _state,
+                  decoration: InputDecoration(labelText: 'State'),
+                  items: stateList
+                      .map((state) => DropdownMenuItem(value: state, child: Text(state)))
+                      .toList(),
+                  onChanged: (value) => setState(() => _state = value),
+                  validator: (value) => value == null ? 'Please select a State' : null,
+                ),
+
+
+                // Urban or Rural Radio Buttons
+                Row(
+                  children: [
+                    const Text('Status:'),
+
+                    Radio(
+                        value: "Urban",
+                        groupValue: _status,
+                        onChanged: (value) => setState(() => _status = value.toString())
+                    ),
+                    const Text("Urban"),
+
+                    Radio(
+                        value: "Rural",
+                        groupValue: _status,
+                        onChanged: (value) => setState(() => _status = value.toString())
+                    ),
+                    const Text("Rural"),
+                  ],
+                ),
+
+                // Educational Status Radio Buttons
+                Row(
+                  children: [
+                    const Text('Educational Status:'),
+
+                    Radio(
+                        value: "Literate",
+                        groupValue: _eStatus,
+                        onChanged: (value) => setState(() => _eStatus = value.toString())
+                    ),
+                    const Text("Literate"),
+
+                    Radio(
+                        value: "Illiterate",
+                        groupValue: _eStatus,
+                        onChanged: (value) => setState(() => _eStatus = value.toString())
+                    ),
+                    const Text("Illiterate"),
+                  ],
+                ),
+
+                // Text - Request Details:-
+                const Text(
+                  "\n\nRequest Details:- ",
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+
                 // Citizenship Dropdown
                 DropdownButtonFormField<String>(
                   value: _citizenship,
@@ -211,10 +340,15 @@ class _submitRequestState extends State<submitRequest> {
                   onChanged: (value) => setState(() => _citizenship = value!),
                 ),
 
+                Text('\nNote:- Only alphabets A-Z a-z number 0-9 and '
+                    "special characters , . - _ ( ) / @ : & ? \ % "
+                    'are allowed in Text for RTI Request application.',
+                style: TextStyle(color: Colors.red),),
+
                 // RTI Query Field
                 TextFormField(
                   controller: _queryController,
-                  decoration: InputDecoration(labelText: 'RTI Request Application'),
+                  decoration: InputDecoration(labelText: 'Text for RTI Request Application'),
                   maxLines: 5,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -223,6 +357,29 @@ class _submitRequestState extends State<submitRequest> {
                     return null;
                   },
                 ),
+
+                // Text - Do not upload
+
+                Text("\n\nNote: \nDo not upload Aadhar Card or "
+                    "PAN Card or any other personal "
+                    "Identification (Except BPL Card).\n"
+                    "PDF file name should be less than 12 "
+                    "alpha-numeric characters only and "
+                    "shouldn't contain any blank spaces.\n\n",
+                  style: TextStyle(color: Colors.red),),
+
+                Row(
+                  children: [
+                    Expanded(child: Text("Supporting document \n(only pdf upto 1 MB)")),
+                    const SizedBox(width: 14.0),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Text('Choose File'),
+                    ),
+                    const Text('No file chosen'),
+                  ],
+                ),
+                const SizedBox(height: 16.0),
 
                 SizedBox(height: 20),
                 Center(
@@ -245,7 +402,7 @@ class _submitRequestState extends State<submitRequest> {
                         );
                       }
                     },
-                    child: Text('Submit'),
+                    child: Text('Make Payment'),
                   ),
                 ),
               ],
