@@ -25,6 +25,8 @@ class MyApp extends StatelessWidget {
         '/submitFirstAppeal' : (context) => const submitFirstAppeal(),
         '/contactUs' : (context) => const contactUs(),
         '/faq' : (context) => const faq(),
+        '/viewHistory' : (context) => const viewHistory(),
+        '/viewStatus' : (context) => const viewStatus(),
       },
     );
   }
@@ -162,7 +164,6 @@ class HomePage extends StatelessWidget {
             ),
           ),
 
-
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
@@ -175,4 +176,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-

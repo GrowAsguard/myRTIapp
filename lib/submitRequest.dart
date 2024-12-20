@@ -11,6 +11,10 @@ class _submitRequestState extends State<submitRequest> {
 
   final _formKey = GlobalKey<FormState>();
 
+  void _resetForm() {
+    _formKey.currentState?.reset();
+  }
+
   // Controllers for form fields
   final _emailController = TextEditingController();
   final _confirmEmailController = TextEditingController();
@@ -64,7 +68,7 @@ class _submitRequestState extends State<submitRequest> {
     return Scaffold(
       appBar: AppBar(
         title: Text('RTI Request Form'),
-        backgroundColor: Colors.cyan,
+        backgroundColor: Colors.orangeAccent,
       ),
 
       body: Padding(
@@ -99,6 +103,7 @@ class _submitRequestState extends State<submitRequest> {
                     color: Colors.blue,
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
 
@@ -111,6 +116,7 @@ class _submitRequestState extends State<submitRequest> {
                       .toList(),
                   onChanged: (value) => setState(() => _ministry = value),
                   validator: (value) => value == null ? 'Please select a ministry' : null,
+                  isExpanded: true,
                 ),
 
                 // Public Authority DropDown
@@ -122,6 +128,7 @@ class _submitRequestState extends State<submitRequest> {
                       .toList(),
                   onChanged: (value) => setState(() => _publicAuthority = value),
                   validator: (value) => value == null ? 'Please select a Public Authority' : null,
+                  isExpanded: true,
                 ),
 
                 // Text - Personal Details of RTI Applicant:-
@@ -191,35 +198,54 @@ class _submitRequestState extends State<submitRequest> {
                   },
                 ),
 
+
+
                 // Gender Radio Buttons
-                Row(
+                Text("\n\nGender"),
+                Column(
                   children: [
-                    Text('Gender: '),
-                    Radio(
-                      value: 'Male',
-                      groupValue: _gender,
-                      onChanged: (value) => setState(() => _gender = value.toString()),
+                    Row(
+                      children: [
+                        Radio(
+                          value: 'Male',
+                          groupValue: _gender,
+                          onChanged: (value) => setState(() => _gender = value.toString()),
+                        ),
+                        Text('Male'),
+                      ],
                     ),
-                    Text('Male'),
-                    Radio(
-                      value: 'Female',
-                      groupValue: _gender,
-                      onChanged: (value) => setState(() => _gender = value.toString()),
+                    Row(
+                      children: [
+                        Radio(
+                          value: 'Female',
+                          groupValue: _gender,
+                          onChanged: (value) => setState(() => _gender = value.toString()),
+                        ),
+                        Text('Female'),
+                      ],
                     ),
-                    Text('Female'),
-                    Radio(
-                      value: 'Third Gender',
-                      groupValue: _gender,
-                      onChanged: (value) => setState(() => _gender = value.toString()),
+                    Row(
+                      children: [
+                        Radio(
+                          value: 'Third Gender',
+                          groupValue: _gender,
+                          onChanged: (value) => setState(() => _gender = value.toString()),
+                        ),
+                        Text('Third Gender'),
+                      ],
                     ),
-                    Text('Third Gender'),
                   ],
                 ),
 
                 // Address Field
                 TextFormField(
                   controller: _addressController,
-                  decoration: InputDecoration(labelText: 'Address'),
+                  decoration: InputDecoration(
+                      labelText: 'Address',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      )
+                  ),
                   maxLines: 3,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -340,15 +366,22 @@ class _submitRequestState extends State<submitRequest> {
                   onChanged: (value) => setState(() => _citizenship = value!),
                 ),
 
+                const SizedBox(height: 16.0),
+
                 Text('\nNote:- Only alphabets A-Z a-z number 0-9 and '
                     "special characters , . - _ ( ) / @ : & ? \ % "
-                    'are allowed in Text for RTI Request application.',
+                    'are allowed in Text for RTI Request application.\n',
                 style: TextStyle(color: Colors.red),),
 
                 // RTI Query Field
                 TextFormField(
                   controller: _queryController,
-                  decoration: InputDecoration(labelText: 'Text for RTI Request Application'),
+                  decoration: InputDecoration(
+                      labelText: 'Text for RTI Request Application',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                )
+                  ),
                   maxLines: 5,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -381,9 +414,12 @@ class _submitRequestState extends State<submitRequest> {
                 ),
                 const SizedBox(height: 16.0),
 
+
+                // Make Payment Button
                 SizedBox(height: 20),
-                Center(
-                  child: ElevatedButton(
+                Row(
+                  children: [
+                    ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         // Submit the form data
@@ -404,6 +440,11 @@ class _submitRequestState extends State<submitRequest> {
                     },
                     child: Text('Make Payment'),
                   ),
+                  ElevatedButton(
+                      onPressed: _resetForm, 
+                      child: Text('Reset'),
+                  )
+                  ]
                 ),
               ],
             ),

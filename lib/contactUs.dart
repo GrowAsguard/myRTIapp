@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class contactUs extends StatelessWidget {
   const contactUs({super.key});
@@ -44,7 +43,7 @@ class contactUs extends StatelessWidget {
               trailing: IconButton(
                 icon: Icon(Icons.email),
                 onPressed: () {
-                  launch('mailto:dirrti-dopt@nic.in');
+                  // launch('mailto:dirrti-dopt@nic.in');
                 },
               ),
             ),
@@ -64,7 +63,7 @@ class contactUs extends StatelessWidget {
               trailing: IconButton(
                 icon: Icon(Icons.email),
                 onPressed: () {
-                  launch('mailto:usir-dopt@nic.in');
+                  // launch('mailto:usir-dopt@nic.in');
                 },
               ),
             ),

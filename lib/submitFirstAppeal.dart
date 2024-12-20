@@ -9,9 +9,10 @@ class submitFirstAppeal extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Online RTI First Appeal Form'),
+        backgroundColor: Colors.orangeAccent,
       ),
       body: Padding(
-          padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0),
         child: Text('Coming Soon',style: TextStyle(fontSize: 30),),
       ),
     );
